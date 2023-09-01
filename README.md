@@ -5,7 +5,7 @@
 - 👋 Hi, I' m @U-Lich.
 - 📅 This project aims at providing a quick and easy solution to create a calendar based on the school schedule provided by the Ho Chi Minh City University of Law.
 - 💞️ This repository is public and I look forward to collaborating on it.
-- 📫 You can reach me at ulich.feedback@gmail.com. Please direct any questions/bug reports there.
+- 📫 You can reach me at <ulich.feedback@gmail.com>. Please direct any questions/bug reports there.
 - 🏠 You can also reports bug and requests feature on the main Github repository.
 
 ## Development
