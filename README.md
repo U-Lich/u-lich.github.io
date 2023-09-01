@@ -1,27 +1,35 @@
-# React + TypeScript + Vite
+# U-Lich
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## About
 
-Currently, two official plugins are available:
+- 👋 Hi, I' m @U-Lich.
+- 📅 This project aims at providing a quick and easy solution to create a calendar based on the school schedule provided by the Ho Chi Minh City University of Law.
+- 💞️ This repository is public and I look forward to collaborating on it.
+- 📫 You can reach me at ulich.feedback@gmail.com. Please direct any questions/bug reports there.
+- 🏠 You can also reports bug and requests feature on the main Github repository.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Development
 
-## Expanding the ESLint configuration
+This project was created using React + TypeScript + Vite.
+Use the following commands to run the project locally:
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+```bash
+# Install dependencies
+$ npm install
 
-- Configure the top-level `parserOptions` property like this:
-
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
+# Run the development server
+$ npm run dev
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+See [package.json](package.json) for more scripts.
+
+## Warning
+
+- ⚠️ I am not affiliated with the Ho Chi Minh City University of Law in any way. Please consider this project as a personal project.
+- ⚠️ I cannot guarantee proper translation of the schedule. Please check the schedule carefully before using it.
+- ⚠️ Because the tool expects **Unicode** to be the input's encoding, if you notice missing characters, please check your input's encoding and manually replace the missing characters with their Unicode equivalent.
+  - If you're using Unikey, make sure your _Character set_ or _Bảng mã_ is set to **Unicode** when you replace the missing characters. See [Character sets](https://www.unikey.org/support/ukmanual.html#charsets) for more information. Also see [Unikey Toolkit](https://www.unikey.org/support/ukmanual.html#uktoolkit) for bulk replacement.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
