@@ -25,3 +25,15 @@ const vi: {
 export function toVi(dow: DOW): string {
   return vi[dow];
 }
+
+export function parseViDOW(text: string): DOW | null {
+  const lowercase = text.toLowerCase();
+
+  for (const viDOW in vi) {
+    if (vi[viDOW as DOW].toLowerCase() === lowercase) {
+      return viDOW as DOW;
+    }
+  }
+
+  return null;
+}

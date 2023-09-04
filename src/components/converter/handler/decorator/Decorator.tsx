@@ -41,8 +41,8 @@ export default function Decorator() {
           className="group self-end rounded-xl p-2 shadow-inner shadow-black/0 transition-all hover:shadow-black/20 focus:shadow-black/20 active:shadow-black/40 disabled:pointer-events-none disabled:opacity-50"
           onClick={() => {
             updateConversion({
-              type: "DEBUG_GRAPHICS",
-              newState: "OBJECT",
+              type: "SWITCH_STATE",
+              state: "OBJECT",
             });
           }}
         >
@@ -59,8 +59,8 @@ export default function Decorator() {
           className="group self-end rounded-xl p-2 shadow-inner shadow-black/0 transition-all hover:shadow-black/20 focus:shadow-black/20 active:shadow-black/40 disabled:pointer-events-none disabled:opacity-50"
           onClick={() => {
             updateConversion({
-              type: "DEBUG_GRAPHICS",
-              newState: "FORMAT",
+              type: "SWITCH_STATE",
+              state: "FORMAT",
             });
           }}
         >
