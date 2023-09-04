@@ -41,7 +41,7 @@ export default function SyncWindow() {
         onClick={() => {
           updateConversion({
             type: "SWITCH_STATE",
-            state: "FORMAT",
+            state: "DECORATION",
           });
         }}
       >

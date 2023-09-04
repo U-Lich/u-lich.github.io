@@ -67,21 +67,9 @@ function handleLoadObject(
 ): Conversion {
   return {
     ...state,
-    state: advance ? ConversionState.DECORATION : state.state,
+    state: advance ? ConversionState.FORMAT : state.state,
     text,
     schedule,
-  };
-}
-
-function handleLoadDecoration(
-  state: Conversion,
-  decoration: ConversionDecoration,
-  advance?: boolean,
-): Conversion {
-  return {
-    ...state,
-    state: advance ? ConversionState.FORMAT : state.state,
-    decoration: decoration,
   };
 }
 
@@ -92,8 +80,20 @@ function handleLoadFormat(
 ): Conversion {
   return {
     ...state,
-    state: advance ? ConversionState.OBJECT : state.state,
+    state: advance ? ConversionState.DECORATION : state.state,
     format,
+  };
+}
+
+function handleLoadDecoration(
+  state: Conversion,
+  decoration: ConversionDecoration,
+  advance?: boolean,
+): Conversion {
+  return {
+    ...state,
+    state: advance ? ConversionState.SYNCED : state.state,
+    decoration: decoration,
   };
 }
 

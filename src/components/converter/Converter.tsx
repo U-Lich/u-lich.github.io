@@ -23,11 +23,11 @@ function Converter() {
         <StateController state={ConversionState.OBJECT}>
           <Parser />
         </StateController>
-        <StateController state={ConversionState.DECORATION}>
-          <Decorator />
-        </StateController>
         <StateController state={ConversionState.FORMAT}>
           <Formatter />
+        </StateController>
+        <StateController state={ConversionState.DECORATION}>
+          <Decorator />
         </StateController>
         <StateController state={ConversionState.SYNCED}>
           <SyncWindow />

@@ -42,7 +42,7 @@ export default function Formatter() {
           onClick={() => {
             updateConversion({
               type: "SWITCH_STATE",
-              state: "DECORATION",
+              state: "OBJECT",
             });
           }}
         >
@@ -60,7 +60,7 @@ export default function Formatter() {
           onClick={() => {
             updateConversion({
               type: "SWITCH_STATE",
-              state: "SYNCED",
+              state: "DECORATION",
             });
           }}
         >
