@@ -18,6 +18,10 @@ export type ConversionAction =
     }
   | {
       type: "SYNC";
+    }
+  | {
+      type: "DEBUG_GRAPHICS";
+      newState: ConversionState;
     };
 
 export const defaultState: Conversion = {
@@ -38,6 +42,8 @@ export function reducer(state: Conversion, action: ConversionAction) {
       return handleLoadFormat(state, action.format);
     case "SYNC":
       return handleSync(state);
+    case "DEBUG_GRAPHICS":
+      return handleDebugGraphics(state, action.newState);
     default:
       return state;
   }
@@ -74,5 +80,15 @@ function handleSync(state: Conversion): Conversion {
   return {
     ...state,
     state: ConversionState.SYNCED,
+  };
+}
+
+function handleDebugGraphics(
+  state: Conversion,
+  newState: ConversionState,
+): Conversion {
+  return {
+    ...state,
+    state: newState,
   };
 }
