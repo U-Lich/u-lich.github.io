@@ -1,3 +1,3 @@
-type OutputFormat = "google-calendar";
+type OutputFormat = "google-calendar" | "xlsx";
 
 export default OutputFormat;

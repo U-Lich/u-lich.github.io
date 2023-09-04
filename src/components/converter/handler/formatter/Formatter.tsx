@@ -1,13 +1,8 @@
-import { useRef, useState } from "react";
 import useConversion from "../../../../hooks/useConversion";
 import { Icon } from "@iconify/react/dist/iconify.js";
 
 export default function Formatter() {
   const { conversion, updateConversion } = useConversion();
-  const area = useRef<HTMLTextAreaElement>(null);
-
-  // debug
-  const [value, setValue] = useState("");
 
   if (!conversion || !updateConversion) {
     return <></>;
@@ -15,29 +10,44 @@ export default function Formatter() {
 
   return (
     <div className="flex h-full w-full flex-col justify-center gap-4">
-      <textarea
-        ref={area}
-        className="resize-none overflow-hidden rounded-xl border-none bg-white p-4 shadow-xl shadow-blue-100 outline-none transition-all placeholder:text-center hover:shadow-lg hover:shadow-blue-200 hover:outline-none focus:shadow-none focus:outline-none focus:ring-2 focus:ring-black active:shadow-none"
-        rows={1}
-        // value={conversion.text ?? ""}
-        value={value}
-        placeholder="Formatter placeholder"
-        onChange={() => {
-          if (!area.current) {
-            return;
-          }
-
-          console.log(area.current.value);
-          setValue(area.current.value);
-        }}
-      />
+      <div className="flex w-full flex-col gap-2">
+        <button
+          className={`flex flex-row items-center gap-4 rounded-xl px-4 py-2 shadow-xl shadow-blue-100 transition-shadow hover:shadow-lg hover:shadow-blue-200 focus:shadow-none active:shadow-none ${
+            conversion.format && conversion.format === "google-calendar"
+              ? "bg-blue-400 text-white"
+              : "bg-white text-black"
+          }`}
+          title="Lưu vào tài khoản Google - Google Calendar. Phải đăng nhập."
+          onClick={() => {
+            updateConversion({
+              type: "LOAD_FORMAT",
+              format: "google-calendar",
+            });
+          }}
+        >
+          <Icon icon="fluent-emoji:sun-behind-small-cloud" width="40px" />
+          <span className="text-left font-semibold">Google Calendar</span>
+        </button>
+        <button
+          className={`flex flex-row items-center gap-4 rounded-xl px-4 py-2 shadow-xl shadow-blue-100 transition-shadow hover:shadow-lg hover:shadow-blue-200 focus:shadow-none active:shadow-none ${
+            conversion.format && conversion.format === "xlsx"
+              ? "bg-blue-400 text-white"
+              : "bg-white text-black"
+          }`}
+          title="Tải về dạng bảng tính .xlsx. Không cần đăng nhập."
+          onClick={() => {
+            updateConversion({
+              type: "LOAD_FORMAT",
+              format: "xlsx",
+            });
+          }}
+        >
+          <Icon icon="fluent-emoji:laptop" width="40px" />
+          <span className="text-left font-semibold">Sheet (.xlsx)</span>
+        </button>
+      </div>
       <div className="flex flex-row justify-between self-stretch">
         <button
-          // ? uncomment this to enable the button
-          // disabled={conversion.text === null}
-
-          // debugging
-          disabled={false}
           className="group self-end rounded-xl p-2 shadow-inner shadow-black/0 transition-all hover:shadow-black/20 focus:shadow-black/20 active:shadow-black/40 disabled:pointer-events-none disabled:opacity-50"
           onClick={() => {
             updateConversion({
@@ -51,11 +61,7 @@ export default function Formatter() {
           </div>
         </button>
         <button
-          // ? uncomment this to enable the button
-          // disabled={conversion.text === null}
-
-          // debugging
-          disabled={false}
+          disabled={conversion.format === null}
           className="group self-end rounded-xl p-2 shadow-inner shadow-black/0 transition-all hover:shadow-black/20 focus:shadow-black/20 active:shadow-black/40 disabled:pointer-events-none disabled:opacity-50"
           onClick={() => {
             updateConversion({
