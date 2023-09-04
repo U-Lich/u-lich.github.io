@@ -43,12 +43,16 @@ export default function Parser() {
         <></>
       ) : (
         <div className="flex flex-row justify-center gap-2">
-          <p className="text-red-500">{errorMessage}</p>
+          <p className="font-bold text-red-500">{errorMessage}</p>
         </div>
       )}
       <textarea
         ref={area}
-        className="resize-none overflow-hidden rounded-xl border-none bg-white p-4 shadow-xl shadow-blue-100 outline-none transition-all placeholder:text-center hover:shadow-lg hover:shadow-blue-200 hover:outline-none focus:shadow-none focus:outline-none focus:ring-2 focus:ring-black active:shadow-none"
+        className={`resize-none overflow-hidden rounded-xl border-none bg-white p-4 shadow-xl outline-none transition-all placeholder:text-center placeholder:font-medium hover:shadow-lg hover:outline-none focus:shadow-none focus:outline-none focus:ring-2 focus:ring-black active:shadow-none ${
+          errorMessage.length > 0
+            ? "shadow-red-100 hover:shadow-red-200"
+            : "shadow-blue-100 hover:shadow-blue-200"
+        }`}
         rows={1}
         // value={conversion.text ?? ""}
         value={scheduleText}
