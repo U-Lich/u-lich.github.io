@@ -39,6 +39,9 @@ export default function Parser() {
 
   return (
     <div className="flex h-full w-full flex-col justify-center gap-4">
+      <div>
+        <span className="text-lg font-bold italic">Thời khóa biểu...</span>
+      </div>
       {errorMessage.length === 0 ? (
         <></>
       ) : (
@@ -48,7 +51,7 @@ export default function Parser() {
       )}
       <textarea
         ref={area}
-        className={`resize-none overflow-hidden rounded-xl border-none bg-white p-4 shadow-xl outline-none transition-all placeholder:text-center placeholder:font-medium hover:shadow-lg hover:outline-none focus:shadow-none focus:outline-none focus:ring-2 focus:ring-black active:shadow-none ${
+        className={`resize-none overflow-y-hidden rounded-xl border-none bg-white p-4 shadow-xl outline-none transition-all placeholder:text-center placeholder:font-medium hover:shadow-lg hover:outline-none focus:shadow-none focus:outline-none focus:ring-2 focus:ring-black active:shadow-none ${
           errorMessage.length > 0
             ? "shadow-red-100 hover:shadow-red-200"
             : "shadow-blue-100 hover:shadow-blue-200"

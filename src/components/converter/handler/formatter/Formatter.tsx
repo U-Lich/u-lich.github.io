@@ -10,6 +10,9 @@ export default function Formatter() {
 
   return (
     <div className="flex h-full w-full flex-col justify-center gap-4">
+      <div>
+        <span className="text-lg font-bold italic">Lưu vào...</span>
+      </div>
       <div className="flex w-full flex-col gap-2">
         <button
           className={`flex flex-row items-center gap-4 rounded-xl px-4 py-2 shadow-xl shadow-blue-100 transition-shadow hover:shadow-lg hover:shadow-blue-200 focus:shadow-none active:shadow-none ${

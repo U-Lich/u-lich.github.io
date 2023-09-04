@@ -1,74 +1,41 @@
-import { useRef, useState } from "react";
+import { type ReactNode } from "react";
 import useConversion from "../../../../hooks/useConversion";
-import { Icon } from "@iconify/react/dist/iconify.js";
+import GoogleDecorator from "./google-calendar-decorator/GoogleDecorator";
+import SheetDecorator from "./sheet-decorator/SheetDecorator";
 
 export default function Decorator() {
-  const { conversion, updateConversion } = useConversion();
-  const area = useRef<HTMLTextAreaElement>(null);
+  const { conversion } = useConversion();
 
-  // debug
-  const [value, setValue] = useState("");
-
-  if (!conversion || !updateConversion) {
+  if (!conversion) {
     return <></>;
   }
 
+  if (conversion.format === "google-calendar") {
+    return (
+      <Wrapper>
+        <GoogleDecorator />
+      </Wrapper>
+    );
+  }
+
+  if (conversion.format === "xlsx") {
+    return (
+      <Wrapper>
+        <SheetDecorator />
+      </Wrapper>
+    );
+  }
+
+  return <></>;
+}
+
+function Wrapper({ children }: { children: ReactNode | ReactNode[] }) {
   return (
     <div className="flex h-full w-full flex-col justify-center gap-4">
-      <textarea
-        ref={area}
-        className="resize-none overflow-hidden rounded-xl border-none bg-white p-4 shadow-xl shadow-blue-100 outline-none transition-all placeholder:text-center hover:shadow-lg hover:shadow-blue-200 hover:outline-none focus:shadow-none focus:outline-none focus:ring-2 focus:ring-black active:shadow-none"
-        rows={1}
-        // value={conversion.text ?? ""}
-        value={value}
-        placeholder="Decorator placeholder"
-        onChange={() => {
-          if (!area.current) {
-            return;
-          }
-
-          console.log(area.current.value);
-          setValue(area.current.value);
-        }}
-      />
-      <div className="flex flex-row justify-between self-stretch">
-        <button
-          // ? uncomment this to enable the button
-          // disabled={conversion.text === null}
-
-          // debugging
-          disabled={false}
-          className="group self-end rounded-xl p-2 shadow-inner shadow-black/0 transition-all hover:shadow-black/20 focus:shadow-black/20 active:shadow-black/40 disabled:pointer-events-none disabled:opacity-50"
-          onClick={() => {
-            updateConversion({
-              type: "SWITCH_STATE",
-              state: "FORMAT",
-            });
-          }}
-        >
-          <div className="flex h-fit w-fit flex-row items-center gap-2 transition-transform group-hover:scale-95 group-focus:scale-95 group-active:scale-90">
-            <Icon icon="fluent-emoji:left-arrow" width="24px" />
-          </div>
-        </button>
-        <button
-          // ? uncomment this to enable the button
-          // disabled={conversion.text === null}
-
-          // debugging
-          disabled={false}
-          className="group self-end rounded-xl p-2 shadow-inner shadow-black/0 transition-all hover:shadow-black/20 focus:shadow-black/20 active:shadow-black/40 disabled:pointer-events-none disabled:opacity-50"
-          onClick={() => {
-            updateConversion({
-              type: "SWITCH_STATE",
-              state: "SYNCED",
-            });
-          }}
-        >
-          <div className="flex h-fit w-fit flex-row items-center gap-2 transition-transform group-hover:scale-95 group-focus:scale-95 group-active:scale-90">
-            <Icon icon="fluent-emoji:right-arrow" width="24px" />
-          </div>
-        </button>
+      <div>
+        <span className="text-lg font-bold italic">Tùy chỉnh...</span>
       </div>
+      {children}
     </div>
   );
 }
