@@ -1,3 +1,14 @@
-type OutputFormat = "google-calendar" | "xlsx";
+import { type CalendarDecoration } from "../decoration/ConversionDecoration";
+import { type SheetDecoration } from "../decoration/sheet-decoration/SheetDecoration";
 
-export default OutputFormat;
+export type OutputFormat =
+  | {
+      type: "google-calendar";
+      decoration: CalendarDecoration | null;
+    }
+  | {
+      type: "xlsx";
+      decoration: SheetDecoration | null;
+    };
+
+export type OutputFormatType = OutputFormat["type"];

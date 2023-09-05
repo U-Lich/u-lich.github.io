@@ -1,7 +1,6 @@
 import Conversion from "../../../objects/conversion/Conversion";
+import { OutputFormat } from "../../../objects/conversion/format/OutputFormat";
 import ConversionState from "../../../objects/conversion/state/ConversionState";
-import ConversionDecoration from "../../../objects/conversion/decoration/ConversionDecoration";
-import OutputFormat from "../../../objects/conversion/format/OutputFormat";
 import { Schedule } from "../../../objects/schedule/Schedule";
 
 export type ConversionAction =
@@ -9,11 +8,6 @@ export type ConversionAction =
       type: "LOAD_OBJECT";
       text: string;
       schedule: Schedule;
-      advance?: boolean;
-    }
-  | {
-      type: "LOAD_DECORATION";
-      decoration: ConversionDecoration;
       advance?: boolean;
     }
   | {
@@ -33,7 +27,6 @@ export const defaultState: Conversion = {
   state: ConversionState.OBJECT,
   text: null,
   schedule: null,
-  decoration: null,
   format: null,
 } as const;
 
@@ -46,8 +39,6 @@ export function reducer(state: Conversion, action: ConversionAction) {
         action.schedule,
         action.advance,
       );
-    case "LOAD_DECORATION":
-      return handleLoadDecoration(state, action.decoration, action.advance);
     case "LOAD_FORMAT":
       return handleLoadFormat(state, action.format, action.advance);
     case "SYNC":
@@ -82,18 +73,6 @@ function handleLoadFormat(
     ...state,
     state: advance ? ConversionState.DECORATION : state.state,
     format,
-  };
-}
-
-function handleLoadDecoration(
-  state: Conversion,
-  decoration: ConversionDecoration,
-  advance?: boolean,
-): Conversion {
-  return {
-    ...state,
-    state: advance ? ConversionState.SYNCED : state.state,
-    decoration: decoration,
   };
 }
 

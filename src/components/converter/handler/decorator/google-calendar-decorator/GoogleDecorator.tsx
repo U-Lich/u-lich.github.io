@@ -1,41 +1,36 @@
-import { Icon } from "@iconify/react/dist/iconify.js";
+import { Icon } from "@iconify/react";
 import useConversion from "../../../../../hooks/useConversion";
+import { useMemo } from "react";
+import { ColorMap } from "../../../../../objects/conversion/decoration/ConversionDecoration";
 
 export default function GoogleDecorator() {
   const { conversion, updateConversion } = useConversion();
+  const colorMap = useMemo(() => {
+    if (!conversion?.decoration) return {} as ColorMap;
+
+    if (
+      conversion.decoration.type !== "calendar" ||
+      conversion.decoration.preset === "monochrome"
+    )
+      return {} as ColorMap;
+
+    return conversion.decoration.colorMap;
+  }, [conversion]);
 
   if (!conversion || !updateConversion) {
     return <></>;
   }
 
   return (
-    <div className="flex flex-row justify-between self-stretch">
+    <div className="">
       <button
-        className="group self-end rounded-xl p-2 shadow-inner shadow-black/0 transition-all hover:shadow-black/20 focus:shadow-black/20 active:shadow-black/40 disabled:pointer-events-none disabled:opacity-50"
+        className="flex w-full flex-row items-center justify-center gap-2 rounded-xl px-4 py-2 shadow-xl shadow-blue-100 transition-shadow hover:shadow-lg hover:shadow-blue-200 focus:shadow-none active:shadow-none"
         onClick={() => {
-          updateConversion({
-            type: "SWITCH_STATE",
-            state: "FORMAT",
-          });
+          console.log(colorMap);
         }}
       >
-        <div className="flex h-fit w-fit flex-row items-center gap-2 transition-transform group-hover:scale-95 group-focus:scale-95 group-active:scale-90">
-          <Icon icon="fluent-emoji:left-arrow" width="24px" />
-        </div>
-      </button>
-      <button
-        disabled={conversion.format === null}
-        className="group self-end rounded-xl p-2 shadow-inner shadow-black/0 transition-all hover:shadow-black/20 focus:shadow-black/20 active:shadow-black/40 disabled:pointer-events-none disabled:opacity-50"
-        onClick={() => {
-          updateConversion({
-            type: "SWITCH_STATE",
-            state: "SYNCED",
-          });
-        }}
-      >
-        <div className="flex h-fit w-fit flex-row items-center gap-2 transition-transform group-hover:scale-95 group-focus:scale-95 group-active:scale-90">
-          <Icon icon="fluent-emoji:right-arrow" width="24px" />
-        </div>
+        <Icon icon="fluent-emoji:floppy-disk" width="24px" />
+        <span className="font-semibold">Lưu</span>
       </button>
     </div>
   );

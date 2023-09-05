@@ -16,7 +16,7 @@ export default function Formatter() {
       <div className="flex w-full flex-col gap-2">
         <button
           className={`flex flex-row items-center gap-4 rounded-xl px-4 py-2 shadow-xl shadow-blue-100 transition-shadow hover:shadow-lg hover:shadow-blue-200 focus:shadow-none active:shadow-none ${
-            conversion.format && conversion.format === "google-calendar"
+            conversion.format && conversion.format.type === "google-calendar"
               ? "bg-blue-400 text-white"
               : "bg-white text-black"
           }`}
@@ -24,7 +24,13 @@ export default function Formatter() {
           onClick={() => {
             updateConversion({
               type: "LOAD_FORMAT",
-              format: "google-calendar",
+              format: {
+                type: "google-calendar",
+                decoration:
+                  conversion.format?.decoration?.type === "calendar"
+                    ? conversion.format.decoration
+                    : null,
+              },
             });
           }}
         >
@@ -33,7 +39,7 @@ export default function Formatter() {
         </button>
         <button
           className={`flex flex-row items-center gap-4 rounded-xl px-4 py-2 shadow-xl shadow-blue-100 transition-shadow hover:shadow-lg hover:shadow-blue-200 focus:shadow-none active:shadow-none ${
-            conversion.format && conversion.format === "xlsx"
+            conversion.format && conversion.format.type === "xlsx"
               ? "bg-blue-400 text-white"
               : "bg-white text-black"
           }`}
@@ -41,7 +47,13 @@ export default function Formatter() {
           onClick={() => {
             updateConversion({
               type: "LOAD_FORMAT",
-              format: "xlsx",
+              format: {
+                type: "xlsx",
+                decoration:
+                  conversion.format?.decoration?.type === "sheet"
+                    ? conversion.format.decoration
+                    : null,
+              },
             });
           }}
         >
