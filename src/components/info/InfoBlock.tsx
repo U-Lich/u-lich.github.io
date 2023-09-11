@@ -2,7 +2,7 @@ import { Icon } from "@iconify/react";
 
 export default function InfoBlock() {
   return (
-    <div className="flex h-fit w-fit flex-col items-center">
+    <div className="mb-10 flex h-fit w-fit flex-col items-center">
       <a
         href="https://github.com/U-Lich/u-lich.github.io"
         target="_blank"
