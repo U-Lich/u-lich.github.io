@@ -8,7 +8,7 @@ export type OutputFormat =
     }
   | {
       type: "xlsx";
-      decoration: SheetDecoration | null;
+      decoration: SheetDecoration;
     };
 
 export type OutputFormatType = OutputFormat["type"];

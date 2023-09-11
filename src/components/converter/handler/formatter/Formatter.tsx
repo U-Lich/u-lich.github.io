@@ -1,3 +1,4 @@
+import { getDefaultSheetDecoration } from "@/objects/conversion/decoration/sheet-decoration/SheetDecoration";
 import useConversion from "../../../../hooks/useConversion";
 import { Icon } from "@iconify/react/dist/iconify.js";
 
@@ -52,7 +53,10 @@ export default function Formatter() {
                 decoration:
                   conversion.format?.decoration?.type === "sheet"
                     ? conversion.format.decoration
-                    : null,
+                    : {
+                        type: "sheet",
+                        params: getDefaultSheetDecoration(),
+                      },
               },
             });
           }}

@@ -16,6 +16,11 @@ export interface Subject {
 }
 
 export interface Schedule {
+  class: string;
+  season: {
+    semester: number;
+    year: [number, number];
+  };
   start: Date;
   subjects: Subject[];
 }
@@ -27,7 +32,7 @@ export default function parseScheduleText(text: string): Schedule {
     /Tuần bắt đầu học kỳ.*(\d{2})\/(\d{2})\/(\d{4})/,
   ).exec(text);
 
-  if (!startText) {
+  if (!startText || startText.length < 4) {
     throw new Error("Start date not found");
   }
 
@@ -36,6 +41,29 @@ export default function parseScheduleText(text: string): Schedule {
     parseInt(startText[2]) - 1,
     parseInt(startText[1]),
   );
+
+  const classText = RegExp(/Lớp: (\d+-[A-Z]+\d+(?:\([A-Z]+\))?)/).exec(text);
+
+  if (!classText || classText.length < 1) {
+    throw new Error("Class not found");
+  }
+
+  const classId = classText[1];
+
+  const semesterText = RegExp(/Học kỳ: (\d{2}) - Năm học: (\d+)-(\d+)/).exec(
+    text,
+  );
+
+  if (!semesterText || semesterText.length < 4) {
+    throw new Error("Semester not found");
+  }
+
+  const semester = parseInt(semesterText[1]);
+  const year: [number, number] = [
+    parseInt(semesterText[2]),
+    parseInt(semesterText[3]),
+  ];
+
   const subjects = parseSubjectsText(text);
 
   if (subjects.length === 0) {
@@ -43,6 +71,11 @@ export default function parseScheduleText(text: string): Schedule {
   }
 
   return {
+    class: classId,
+    season: {
+      semester,
+      year,
+    },
     start: startDate,
     subjects,
   } satisfies Schedule;
@@ -114,7 +147,7 @@ function parseDashDelimNumber(text: string): number[] {
   // e.g. 123------01----- => 1,2,3,10,11
   // e.g. 123______01_____ => 1,2,3,10,11
   const numberList: number[] = [];
-  const numberRegex = /\d+/g;
+  const numberRegex = /\d/;
 
   for (let i = 0; i < text.length; i++) {
     if (!numberRegex.test(text[i])) {

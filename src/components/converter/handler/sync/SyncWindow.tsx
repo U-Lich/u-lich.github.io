@@ -1,13 +1,36 @@
-import { useRef, useState } from "react";
+import { type ReactNode } from "react";
 import useConversion from "../../../../hooks/useConversion";
 import { Icon } from "@iconify/react/dist/iconify.js";
+import SheetSyncWindow from "./sheet-sync/SheetSyncWindow";
 
 export default function SyncWindow() {
-  const { conversion, updateConversion } = useConversion();
-  const area = useRef<HTMLTextAreaElement>(null);
+  const { conversion } = useConversion();
 
-  // debug
-  const [value, setValue] = useState("");
+  if (!conversion?.format) {
+    return <></>;
+  }
+
+  if (conversion.format.type === "google-calendar") {
+    return (
+      <Wrapper>
+        <SheetSyncWindow />
+      </Wrapper>
+    );
+  }
+
+  if (conversion.format.type === "xlsx") {
+    return (
+      <Wrapper>
+        <SheetSyncWindow />
+      </Wrapper>
+    );
+  }
+
+  return <></>;
+}
+
+function Wrapper({ children }: { children: ReactNode | ReactNode[] }) {
+  const { conversion, updateConversion } = useConversion();
 
   if (!conversion || !updateConversion) {
     return <></>;
@@ -15,22 +38,10 @@ export default function SyncWindow() {
 
   return (
     <div className="flex h-full w-full flex-col justify-center gap-4">
-      <textarea
-        ref={area}
-        className="resize-none overflow-hidden rounded-xl border-none bg-white p-4 shadow-xl shadow-blue-100 outline-none transition-all placeholder:text-center hover:shadow-lg hover:shadow-blue-200 hover:outline-none focus:shadow-none focus:outline-none focus:ring-2 focus:ring-black active:shadow-none"
-        rows={1}
-        // value={conversion.text ?? ""}
-        value={value}
-        placeholder="Sync placeholder"
-        onChange={() => {
-          if (!area.current) {
-            return;
-          }
-
-          console.log(area.current.value);
-          setValue(area.current.value);
-        }}
-      />
+      <div>
+        <span className="text-lg font-bold italic">Lưu...</span>
+      </div>
+      {children}
       <button
         // ? uncomment this to enable the button
         // disabled={conversion.text === null}
