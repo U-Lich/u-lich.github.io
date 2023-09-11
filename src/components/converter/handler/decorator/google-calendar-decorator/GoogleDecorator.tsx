@@ -6,15 +6,15 @@ import { ColorMap } from "../../../../../objects/conversion/decoration/Conversio
 export default function GoogleDecorator() {
   const { conversion, updateConversion } = useConversion();
   const colorMap = useMemo(() => {
-    if (!conversion?.decoration) return {} as ColorMap;
+    if (!conversion?.format?.decoration) return {} as ColorMap;
 
     if (
-      conversion.decoration.type !== "calendar" ||
-      conversion.decoration.preset === "monochrome"
+      conversion.format.decoration.type !== "calendar" ||
+      conversion.format.decoration.preset === "monochrome"
     )
       return {} as ColorMap;
 
-    return conversion.decoration.colorMap;
+    return conversion.format.decoration.colorMap;
   }, [conversion]);
 
   if (!conversion || !updateConversion) {
