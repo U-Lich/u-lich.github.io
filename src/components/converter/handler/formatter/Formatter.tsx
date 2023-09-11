@@ -16,12 +16,14 @@ export default function Formatter() {
       </div>
       <div className="flex w-full flex-col gap-2">
         <button
-          className={`flex flex-row items-center gap-4 rounded-xl px-4 py-2 shadow-xl shadow-blue-100 transition-shadow hover:shadow-lg hover:shadow-blue-200 focus:shadow-none active:shadow-none ${
+          disabled
+          className={`flex flex-row items-center gap-4 rounded-xl px-4 py-2 shadow-xl shadow-blue-100 transition-shadow hover:shadow-lg hover:shadow-blue-200 focus:shadow-none active:shadow-none disabled:cursor-not-allowed disabled:opacity-50 disabled:shadow-md disabled:shadow-black/20 ${
             conversion.format && conversion.format.type === "google-calendar"
               ? "bg-blue-400 text-white"
               : "bg-white text-black"
           }`}
-          title="Lưu vào tài khoản Google - Google Calendar. Phải đăng nhập."
+          // title="Lưu vào tài khoản Google - Google Calendar. Phải đăng nhập."
+          title="Coming soon!"
           onClick={() => {
             updateConversion({
               type: "LOAD_FORMAT",
@@ -39,7 +41,7 @@ export default function Formatter() {
           <span className="text-left font-semibold">Google Calendar</span>
         </button>
         <button
-          className={`flex flex-row items-center gap-4 rounded-xl px-4 py-2 shadow-xl shadow-blue-100 transition-shadow hover:shadow-lg hover:shadow-blue-200 focus:shadow-none active:shadow-none ${
+          className={`flex flex-row items-center gap-4 rounded-xl px-4 py-2 shadow-xl shadow-blue-100 transition-shadow hover:shadow-lg hover:shadow-blue-200 focus:shadow-none active:shadow-none disabled:cursor-not-allowed disabled:opacity-50 disabled:shadow-md disabled:shadow-black/20 ${
             conversion.format && conversion.format.type === "xlsx"
               ? "bg-blue-400 text-white"
               : "bg-white text-black"
