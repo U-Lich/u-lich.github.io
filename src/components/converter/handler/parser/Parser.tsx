@@ -42,11 +42,42 @@ export default function Parser() {
       <div>
         <span className="text-lg font-bold italic">Thời khóa biểu...</span>
       </div>
-      {errorMessage.length === 0 ? (
+      {!schedule ? (
         <></>
       ) : (
-        <div className="flex flex-row justify-center gap-2">
-          <p className="font-bold text-red-500">{errorMessage}</p>
+        <div className="flex w-full flex-col items-stretch gap-1">
+          <div className="flex grow flex-row justify-stretch gap-1">
+            <div className="grow truncate font-medium">
+              <span className="truncate">Học kỳ</span>
+            </div>
+            <div className="truncate">
+              <span>{schedule.season.semester}</span>
+            </div>
+          </div>
+          <div className="flex grow flex-row justify-stretch gap-1">
+            <div className="grow truncate font-medium">
+              <span className="truncate">Năm học</span>
+            </div>
+            <div className="truncate">
+              <span>{`${schedule.season.year[0]} - ${schedule.season.year[1]}`}</span>
+            </div>
+          </div>
+          <div className="flex grow flex-row justify-stretch gap-1">
+            <div className="grow truncate font-medium">
+              <span className="truncate">Số môn học</span>
+            </div>
+            <div className="truncate">
+              <span>
+                {
+                  schedule.subjects.reduce(
+                    (acc, cur) =>
+                      acc.includes(cur.name) ? acc : acc.concat(cur.name),
+                    [] as string[],
+                  ).length
+                }
+              </span>
+            </div>
+          </div>
         </div>
       )}
       <textarea
@@ -67,6 +98,13 @@ export default function Parser() {
           setScheduleText(area.current.value);
         }}
       />
+      {errorMessage.length === 0 ? (
+        <></>
+      ) : (
+        <div className="flex flex-row justify-center gap-2">
+          <p className="italic text-red-500">{errorMessage}</p>
+        </div>
+      )}
       <button
         disabled={!schedule}
         className="group self-end rounded-xl p-2 shadow-inner shadow-black/0 transition-all hover:shadow-black/20 focus:shadow-black/20 active:shadow-black/40 disabled:pointer-events-none disabled:opacity-50"
